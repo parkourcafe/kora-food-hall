@@ -814,7 +814,8 @@
       .deposits-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .hero-photo-main { height: 240px; }
+      .hero-photo-main { height: 300px; }
+      .hero-photo-main img { object-position: center 12%; }
       .stat-num { font-size: 28px; }
       .stat-label { font-size: 10px; }
       .stat-card { padding: 18px 12px; }
@@ -868,12 +869,7 @@
     }
     .gallery-right {
       display: grid;
-      grid-template-rows: 1fr 220px;
-      gap: 4px;
-    }
-    .gallery-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
       gap: 4px;
     }
     .gallery-item {
@@ -948,8 +944,8 @@
     }
     @media (max-width: 900px) {
       .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; height: auto; }
-      .gallery-item { height: 260px; }
-      .gallery-right { grid-template-rows: 260px 200px; }
+      .gallery-item { height: 280px; }
+      .gallery-right { grid-template-rows: 280px 280px; }
       .alley-photo-wrap { height: 240px; }
     }
 
@@ -1122,20 +1118,13 @@
         <img src="images/exterior-night.png" alt="KORA Food Hall — exterior at night" loading="lazy">
         <div class="gallery-label">KORA Food Hall · Ubud, Bali</div>
       </div>
-      <!-- Right column -->
+      <!-- Right column: two equal images stacked -->
       <div class="gallery-right">
-        <!-- Top right: interior -->
         <div class="gallery-item">
-          <img src="images/interior.png" alt="KORA — dining interior" loading="lazy">
+          <img src="images/alley-day.png" alt="70m Instagram Alley — day" loading="lazy">
         </div>
-        <!-- Bottom right: two smaller -->
-        <div class="gallery-row">
-          <div class="gallery-item">
-            <img src="images/alley-day.png" alt="70m Instagram Alley — day" loading="lazy">
-          </div>
-          <div class="gallery-item">
-            <img src="images/exterior-day.png" alt="KORA copper facade" loading="lazy">
-          </div>
+        <div class="gallery-item">
+          <img src="images/exterior-day.png" alt="KORA copper facade" loading="lazy">
         </div>
       </div>
     </div>
@@ -1197,6 +1186,11 @@
       </div>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ PHOTO BREAK — interior -->
+  <div class="photo-break">
+    <img src="images/interior.png" alt="KORA Food Hall — tropical dining interior" loading="lazy" style="object-position: center 25%;">
+  </div>
 
   <!-- ═══════════════════════════════════════════════════════════ MODEL -->
   <section id="model">
