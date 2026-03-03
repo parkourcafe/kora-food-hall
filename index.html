@@ -101,7 +101,30 @@
         linear-gradient(160deg, #1a1c24 0%, #1e2028 45%, #252220 100%);
       padding: 100px 0 60px;
     }
-    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .hero-right-col { display: flex; flex-direction: column; gap: 20px; }
+    .hero-photo-pair {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 8px;
+      height: 300px;
+      flex-shrink: 0;
+    }
+    .hero-photo-item {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+    .hero-photo-item:first-child img { object-position: center 18%; }
+    .hero-photo-item:last-child img  { object-position: center 30%; }
+    .hero-photo-item:hover img { transform: scale(1.05); }
     .hero-eyebrow {
       font-family: var(--font-h);
       font-size: 12px; font-weight: 600; letter-spacing: 0.2em;
@@ -797,6 +820,7 @@
       .deposits-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .hero-photo-pair { height: 220px; }
       .stat-num { font-size: 28px; }
       .stat-label { font-size: 10px; }
       .stat-card { padding: 18px 12px; }
@@ -987,6 +1011,23 @@
     }
     .btn-apply-row:hover { background: var(--copper); color: var(--white); }
 
+    /* ─── MODAL UNIT CHIP ─────────────────────────────────────── */
+    .modal-unit-chip {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(178,134,83,0.13);
+      border: 1px solid rgba(178,134,83,0.35);
+      color: var(--copper);
+      font-family: var(--font-h);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin: 8px 0 14px;
+    }
+
     </style>
 </head>
 <body>
@@ -1025,6 +1066,15 @@
             <a href="https://wa.me/6287828385226?text=Hi%2C%20I'm%20interested%20in%20a%20unit%20at%20KORA%20Food%20Hall" target="_blank" class="btn btn-wa">💬 WhatsApp Us</a>
           </div>
         </div>
+        <div class="hero-right-col">
+        <div class="hero-photo-pair">
+          <div class="hero-photo-item">
+            <img src="images/entrance.png" alt="KORA Food Hall — golden entrance alley, Ubud" loading="eager">
+          </div>
+          <div class="hero-photo-item">
+            <img src="images/interior-fire.png" alt="KORA Food Hall — candlelit dining interior" loading="eager">
+          </div>
+        </div>
         <div class="hero-stats">
           <div class="stat-card">
             <div class="stat-num">12</div>
@@ -1050,7 +1100,8 @@
             <div class="stat-num">Dec '26</div>
             <div class="stat-label">Grand Opening</div>
           </div>
-        </div>
+        </div><!-- /hero-stats -->
+        </div><!-- /hero-right-col -->
       </div>
     </div>
   </section>
@@ -1232,7 +1283,7 @@
               <td>$598</td>
               <td><span class="badge badge-avail">Available</span></td>
               <td>Near main entrance</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('02','Seafood Counter + Oysters')">Apply →</button></td>
             </tr>
             <tr>
               <td><span class="unit-num">03</span></td>
@@ -1241,7 +1292,7 @@
               <td>$469</td>
               <td><span class="badge badge-avail">Available</span></td>
               <td>Standard unit</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('03','Mediterranean / Levant')">Apply →</button></td>
             </tr>
             <tr>
               <td><span class="unit-num">04</span></td>
@@ -1250,7 +1301,7 @@
               <td>$612</td>
               <td><span class="badge badge-avail">Available</span></td>
               <td>High visibility</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('04','Korean / Pan Asian')">Apply →</button></td>
             </tr>
             <tr>
               <td><span class="unit-num">05</span></td>
@@ -1259,7 +1310,7 @@
               <td>$630</td>
               <td><span class="badge badge-avail">Available</span></td>
               <td>Double frontage</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('05','Burger (Smash)')">Apply →</button></td>
             </tr>
             <tr>
               <td><span class="unit-num">06</span></td>
@@ -1268,7 +1319,7 @@
               <td>$304</td>
               <td><span class="badge badge-avail">Available</span></td>
               <td>Compact, efficient</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('06','Japanese (Sushi)')">Apply →</button></td>
             </tr>
             <tr>
               <td><span class="unit-num">07</span></td>
@@ -1277,7 +1328,7 @@
               <td>$472</td>
               <td><span class="badge badge-avail">Available</span></td>
               <td>Standard unit</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('07','Poke / Salad / Healthy')">Apply →</button></td>
             </tr>
             <tr>
               <td><span class="unit-num">08</span></td>
@@ -1286,7 +1337,7 @@
               <td>$801</td>
               <td><span class="badge badge-avail">Available</span></td>
               <td>Largest kitchen</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('08','Modern Nasi / Indonesian')">Apply →</button></td>
             </tr>
             <tr>
               <td><span class="unit-num">09</span></td>
@@ -1295,7 +1346,7 @@
               <td>$794</td>
               <td><span class="badge badge-avail">Available</span></td>
               <td>Extra ventilation</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('09','Plant Based / Vegan')">Apply →</button></td>
             </tr>
             <tr>
               <td><span class="unit-num">10</span></td>
@@ -1304,7 +1355,7 @@
               <td>$441</td>
               <td><span class="badge badge-avail">Available</span></td>
               <td>Ground level</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('10','Coffee / All Day Breakfast')">Apply →</button></td>
             </tr>
             <tr>
               <td><span class="unit-num">11</span></td>
@@ -1313,7 +1364,7 @@
               <td>$420</td>
               <td><span class="badge badge-avail">Available</span></td>
               <td>Near exit flow</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('11','Gelato / Desserts')">Apply →</button></td>
             </tr>
             <tr>
               <td><span class="unit-num">12</span></td>
@@ -1331,7 +1382,7 @@
               <td>$385</td>
               <td><span class="badge badge-outdoor">Outdoor</span></td>
               <td>Shared grill, special terms</td>
-              <td><button class="btn-apply-row" onclick="openApplyModal()">Apply →</button></td>
+              <td><button class="btn-apply-row" onclick="openApplyModal('FY','The Fire Yard — Outdoor Grill')">Apply →</button></td>
             </tr>
           </tbody>
         </table>
@@ -1881,7 +1932,7 @@
         <div>
           <div class="map-container" style="padding:0; display:block;">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3943.7869581898897!2d115.25872687585658!3d-8.505456191508878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23d20bba4e5df%3A0xf39e4cef2a1a74e0!2sUbud%2C+Kecamatan+Ubud%2C+Kabupaten+Gianyar%2C+Bali+80571%2C+Indonesia!5e0!3m2!1sen!2sid!4v1741500000000!5m2!1sen!2sid"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3943.7869581898897!2d115.2620788!3d-8.5104812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23d1cc96b225d%3A0xec03f6c5f2b39aba!2sKora+Food+Hall!5e0!3m2!1sen!2sid!4v1741600000000!5m2!1sen!2sid"
               width="100%" height="100%"
               style="border:0; border-radius: var(--r); min-height: 360px; display:block;"
               allowfullscreen
@@ -1950,8 +2001,10 @@
       <button class="modal-close" onclick="closeApplyModal()" aria-label="Close">×</button>
       <div class="sec-label" style="margin-bottom:6px;">Apply for a Unit</div>
       <div class="modal-title">KORA Food Hall, Ubud</div>
+      <div id="apply-unit-chip" class="modal-unit-chip" style="display:none;"></div>
       <div class="modal-sub">Takes about 15 minutes · We review every application within 48–72 hours</div>
       <iframe
+        id="apply-iframe"
         src="https://423hrh.share-na2.hsforms.com/2i4c-2GlyTP6XC8QwNOvrKQ"
         title="KORA Tenant Application Form"
         loading="lazy">
@@ -1977,13 +2030,40 @@
     }
 
     // ─── APPLY MODAL ──────────────────────────────────────────────
-    function openApplyModal() {
+    // Base HubSpot form URL — pre-fill via URL params when unit is known
+    const APPLY_FORM_BASE = 'https://423hrh.share-na2.hsforms.com/2i4c-2GlyTP6XC8QwNOvrKQ';
+
+    function openApplyModal(unit, category) {
+      const iframe = document.getElementById('apply-iframe');
+      const chip   = document.getElementById('apply-unit-chip');
+
+      if (unit && category) {
+        // URL param names must match your HubSpot field internal names.
+        // In HubSpot: Forms → edit form → click a field → "Field name" in the right panel.
+        const params = new URLSearchParams({
+          unit_number:   unit,
+          unit_category: category
+        });
+        iframe.src = APPLY_FORM_BASE + '?' + params.toString();
+        chip.textContent = 'Unit ' + unit + ' — ' + category;
+        chip.style.display = 'inline-flex';
+      } else {
+        iframe.src = APPLY_FORM_BASE;
+        chip.style.display = 'none';
+      }
+
       document.getElementById('apply-modal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+
     function closeApplyModal() {
       document.getElementById('apply-modal').classList.remove('open');
       document.body.style.overflow = '';
+      // Reset after modal fades out so next open starts fresh
+      setTimeout(() => {
+        document.getElementById('apply-iframe').src = APPLY_FORM_BASE;
+        document.getElementById('apply-unit-chip').style.display = 'none';
+      }, 300);
     }
     document.getElementById('apply-modal').addEventListener('click', function(e) {
       if (e.target === this) closeApplyModal();
