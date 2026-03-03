@@ -110,17 +110,34 @@
     }
     .hero-title {
       font-family: var(--font-h);
-      font-size: clamp(42px, 6vw, 76px);
-      font-weight: 800; line-height: 0.95;
+      font-size: clamp(52px, 7vw, 92px);
+      font-weight: 800; line-height: 0.92;
       letter-spacing: -0.01em;
       text-transform: uppercase;
       color: var(--white);
-      margin-bottom: 24px;
+      margin-bottom: 12px;
     }
     .hero-title em { color: var(--copper); font-style: normal; }
+    .hero-tagline {
+      font-family: var(--font-h);
+      font-size: clamp(20px, 2.8vw, 32px);
+      font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 20px;
+    }
+    .hero-facts {
+      font-family: var(--font-h);
+      font-size: clamp(15px, 1.8vw, 20px);
+      font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      margin-bottom: 20px;
+      opacity: 0.75;
+    }
     .hero-sub {
-      font-size: 18px; font-weight: 300; color: var(--ivory-d);
-      line-height: 1.6; margin-bottom: 36px; max-width: 480px;
+      font-size: 17px; font-weight: 300; color: var(--ivory-d);
+      line-height: 1.6; margin-bottom: 36px; max-width: 460px;
     }
     .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn {
@@ -182,6 +199,46 @@
 
     /* ─── WHY KORA ───────────────────────────────────────────────── */
     .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+    /* ── Shell & Core model section ── */
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .model-col {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 32px 28px;
+    }
+    .model-col--tenant {
+      background: rgba(196,100,30,0.07);
+      border-color: var(--copper);
+    }
+    .model-col-icon { font-size: 26px; margin-bottom: 16px; }
+    .model-col-title {
+      font-size: 18px; font-weight: 700;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .model-col--tenant .model-col-title { color: var(--copper); }
+    .model-col-sub {
+      font-size: 13px; color: var(--text-muted);
+      margin-bottom: 24px; line-height: 1.5;
+    }
+    .model-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .model-list li {
+      font-size: 14px; color: var(--text-muted);
+      padding-left: 20px; position: relative; line-height: 1.5;
+    }
+    .model-list li::before {
+      content: "✓"; position: absolute; left: 0;
+      color: var(--copper); font-weight: 700;
+    }
     .why-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
@@ -204,6 +261,31 @@
       margin-bottom: 10px;
     }
     .why-desc { font-size: 14px; color: var(--ivory-d); line-height: 1.6; }
+    .why-card--wide {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 28px;
+      padding: 28px 36px;
+    }
+    .why-card--wide .why-icon { margin-bottom: 0; flex-shrink: 0; }
+    .why-card--wide .why-body { display: flex; flex-direction: column; gap: 6px; }
+    .why-card--wide .why-title { margin-bottom: 0; }
+    .why-card--wide .why-stat {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .why-card--wide .why-stat-num {
+      font-family: var(--font-h);
+      font-size: 42px; font-weight: 800;
+      color: var(--copper); line-height: 1;
+    }
+    .why-card--wide .why-stat-label {
+      font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ivory-d);
+      margin-top: 4px;
+    }
 
     /* ─── UNITS TABLE ────────────────────────────────────────────── */
     .table-wrap { overflow-x: auto; }
@@ -689,6 +771,9 @@
       .hero-inner { grid-template-columns: 1fr; gap: 40px; }
       .hero-stats { grid-template-columns: repeat(3, 1fr); }
       .why-grid { grid-template-columns: 1fr 1fr; }
+      .why-card--wide { grid-template-columns: auto 1fr; }
+      .why-card--wide .why-stat { display: none; }
+      .model-grid { grid-template-columns: 1fr; }
       .terms-grid { grid-template-columns: 1fr 1fr; }
       .deposits-grid { grid-template-columns: 1fr 1fr; }
       .steps-grid { grid-template-columns: 1fr 1fr; }
@@ -705,14 +790,34 @@
     @media (max-width: 600px) {
       section { padding: 56px 0; }
       .why-grid { grid-template-columns: 1fr; }
+      .why-card--wide { grid-template-columns: 1fr; padding: 28px; }
+      .why-card--wide .why-icon { margin-bottom: 12px; }
+      .model-grid { grid-template-columns: 1fr; }
       .terms-grid { grid-template-columns: 1fr 1fr; }
       .deposits-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
-      .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-      .stat-num { font-size: 30px; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .stat-num { font-size: 28px; }
+      .stat-label { font-size: 10px; }
+      .stat-card { padding: 18px 12px; }
+      .hero-eyebrow { letter-spacing: 0.08em; font-size: 10px; }
       .hero-btns { flex-direction: column; }
       .form-row { grid-template-columns: 1fr; }
       .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0; right: 0;
+        background: var(--bg);
+        padding: 20px 24px 28px;
+        gap: 6px;
+        border-bottom: 1px solid var(--border);
+        z-index: 200;
+      }
+      .nav-links.open a { padding: 10px 0; font-size: 17px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .nav-links.open .nav-cta { margin-top: 10px; text-align: center; }
       .nav-burger { display: flex; }
     }
   
@@ -826,7 +931,7 @@
       <a href="#faq">FAQ</a>
       <a href="#apply" class="nav-cta">Apply Now</a>
     </div>
-    <div class="nav-burger" onclick="this.classList.toggle('open')">
+    <div class="nav-burger" onclick="this.classList.toggle('open'); document.querySelector('.nav-links').classList.toggle('open');">
       <span></span><span></span><span></span>
     </div>
   </nav>
@@ -836,14 +941,12 @@
     <div class="container">
       <div class="hero-inner">
         <div>
-          <div class="hero-eyebrow">Ubud, Bali · Opening December 2026</div>
-          <h1 class="hero-title">
-            12 Kitchens.<br>
-            2 Bars. Event Hall.<br>
-            Ubud's Social Dining Space.
-          </h1>
+          <div class="hero-eyebrow">Monkey Forest Rd, 15 · Ubud, Bali · Opening December 2026</div>
+          <h1 class="hero-title">KORA<br>Food Hall</h1>
+          <div class="hero-tagline">Ubud Social Dining</div>
+          <div class="hero-facts">12 Restaurants · 2 Bars · Kids Area · 1,800 m²</div>
           <p class="hero-sub">
-            KORA is not a food court. It's a curated social dining space — 12 selected concepts, two levels, one atmosphere. You cook. We fill the seats.
+            A curated food hall &amp; life destination — 12 kitchens, one atmosphere.
           </p>
           <div class="hero-btns">
             <a href="#apply" class="btn btn-primary">Apply for a Unit</a>
@@ -854,23 +957,23 @@
         <div class="hero-stats">
           <div class="stat-card">
             <div class="stat-num">12</div>
-            <div class="stat-label">Food Concepts</div>
+            <div class="stat-label">Street-Facing Units</div>
           </div>
           <div class="stat-card">
-            <div class="stat-num">290+</div>
-            <div class="stat-label">AC Seats</div>
+            <div class="stat-num">400+</div>
+            <div class="stat-label">Seats</div>
           </div>
           <div class="stat-card">
-            <div class="stat-num">+</div>
-            <div class="stat-label">Event Hall</div>
+            <div class="stat-num">1,500</div>
+            <div class="stat-label">Guests / Day</div>
           </div>
           <div class="stat-card">
-            <div class="stat-num">1,800</div>
-            <div class="stat-label">sqm Total</div>
+            <div class="stat-num">4,000</div>
+            <div class="stat-label">m² Municipal Parking</div>
           </div>
           <div class="stat-card">
-            <div class="stat-num">$15K</div>
-            <div class="stat-label">Monthly Marketing</div>
+            <div class="stat-num">500</div>
+            <div class="stat-label">m² AC Zones</div>
           </div>
           <div class="stat-card">
             <div class="stat-num">Dec '26</div>
@@ -939,14 +1042,83 @@
         </div>
         <div class="why-card">
           <div class="why-icon">📍</div>
-          <div class="why-title">Central Ubud Location</div>
-          <div class="why-desc">Main tourist and expat route. Walking distance from Monkey Forest, Ubud Market, dozens of hotels. 4,000 m² parking.</div>
+          <div class="why-title">Ubud's #1 Tourist Artery</div>
+          <div class="why-desc">On the only one-way road connecting Monkey Forest (3,000 visitors/day) to Ubud's city centre — 10,000+ tourists pass this corridor daily. Adjacent to the largest municipal parking in central Ubud, the only spot in the city where tour buses can stop.</div>
         </div>
         <div class="why-card">
           <div class="why-icon">🍸</div>
           <div class="why-title">ORA Lounge Bar</div>
           <div class="why-desc">Second-floor bar drives evening footfall for all tenants. Events, live music, DJ sets — the atmosphere that keeps guests coming back.</div>
         </div>
+
+        <!-- Kids Zone — full-width featured card -->
+        <div class="why-card why-card--wide">
+          <div class="why-icon">🧒</div>
+          <div class="why-body">
+            <div class="why-title">Kids Zone — 2nd Floor</div>
+            <div class="why-desc">A dedicated, air-conditioned kids area on the second floor — so parents can relax, stay longer, and spend more. Families are one of Ubud's biggest visitor segments, and KORA is built to welcome them fully.</div>
+          </div>
+          <div class="why-stat">
+            <div class="why-stat-num">80 m²</div>
+            <div class="why-stat-label">AC Kids Area</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ MODEL -->
+  <section id="model">
+    <div class="container">
+      <div class="sec-header">
+        <div class="sec-label">The Model</div>
+        <h2 class="sec-title">You cook.<br>We run everything else.</h2>
+        <p class="sec-sub">KORA units are delivered shell &amp; core — electricity, plumbing, and central dishwashing are already in place. You focus entirely on your food.</p>
+      </div>
+      <div class="model-grid">
+
+        <!-- Column 1: Infrastructure included -->
+        <div class="model-col">
+          <div class="model-col-icon">🏗️</div>
+          <div class="model-col-title">Unit delivered ready to fit out</div>
+          <div class="model-col-sub">Shell &amp; core — infrastructure already installed</div>
+          <ul class="model-list">
+            <li>Electricity &amp; plumbing installed</li>
+            <li>Central dishwasher — 1,500 covers/day capacity</li>
+            <li>Grease trap connected</li>
+            <li>Shared AC system (3 zones, ~500 m²)</li>
+            <li>Shared seating for 400+ guests</li>
+          </ul>
+        </div>
+
+        <!-- Column 2: Tenant responsibility (highlighted) -->
+        <div class="model-col model-col--tenant">
+          <div class="model-col-icon">👨‍🍳</div>
+          <div class="model-col-title">You focus on your concept</div>
+          <div class="model-col-sub">Three things — and three things only</div>
+          <ul class="model-list">
+            <li>Interior fit-out of your unit</li>
+            <li>Your branding &amp; signage</li>
+            <li>Cooking &amp; your menu</li>
+          </ul>
+        </div>
+
+        <!-- Column 3: KORA handles -->
+        <div class="model-col">
+          <div class="model-col-icon">⚙️</div>
+          <div class="model-col-title">KORA handles the rest</div>
+          <div class="model-col-sub">Operations managed by the management company</div>
+          <ul class="model-list">
+            <li>Waiter service &amp; dishware collection</li>
+            <li>Common area cleaning &amp; 24/7 security</li>
+            <li>Marketing &amp; event programming</li>
+            <li>Kids Zone (80 m², AC, 2nd floor)</li>
+            <li>Sustainable waste management</li>
+            <li>Payments system &amp; reporting</li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1326,7 +1498,7 @@
               Where is KORA located?
               <span class="faq-arrow">+</span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner">Central Ubud, Bali — on the main tourist and expat route. Walking distance from Monkey Forest, Ubud Market, and dozens of hotels and villas. 4,000 m² of parking.</div></div>
+            <div class="faq-a"><div class="faq-a-inner">Central Ubud, Bali — on the only one-way road connecting Monkey Forest (3,000 visitors/day) to the Ubud town centre. Over 10,000 tourists move through this corridor every day. Walking distance from Ubud Market and dozens of hotels and villas. Adjacent to the largest municipal parking in central Ubud — the only location in the city where tour buses can drop off and pick up guests.</div></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" onclick="toggleFaq(this)">
@@ -1340,7 +1512,7 @@
               What's included in the unit?
               <span class="faq-arrow">+</span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner">Bare shell with basic utilities (water, electricity, grease trap). You do your own fit-out and bring your own equipment. KORA handles all common area infrastructure.</div></div>
+            <div class="faq-a"><div class="faq-a-inner">Units are delivered shell &amp; core: electricity, plumbing, and grease trap are already installed, and you have access to the central dishwasher (capacity: 1,500 covers/day) and shared AC. You are responsible for your unit's interior fit-out, your own signage, and cooking. Everything else — waiter service, cleaning, security, marketing, events, waste, and payments — is handled by KORA's management team.</div></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" onclick="toggleFaq(this)">
@@ -1412,7 +1584,14 @@
               Is there parking?
               <span class="faq-arrow">+</span>
             </button>
-            <div class="faq-a"><div class="faq-a-inner">Yes — 4,000 m² of dedicated parking for 50+ motorbikes and 15+ cars. Parking is a significant advantage in central Ubud where it's otherwise limited.</div></div>
+            <div class="faq-a"><div class="faq-a-inner">Yes — KORA is adjacent to the largest municipal parking in central Ubud: 4,000 m², and the only parking in the city centre that can accommodate tour buses. In a city where parking is notoriously scarce, this is a rare structural advantage — for independent visitors, expats, and organised tour groups alike.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Is there a kids area?
+              <span class="faq-arrow">+</span>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Yes — KORA has a dedicated kids zone on the second floor: 80 m², fully air-conditioned. Parents can leave their children safely while they eat, explore, or relax. This is a deliberate feature — families are a major segment of Ubud's visitor base, and giving them a reason to stay longer directly benefits every tenant.</div></div>
           </div>
           <div class="faq-item">
             <button class="faq-q" onclick="toggleFaq(this)">
@@ -1564,13 +1743,13 @@
       <div class="team-grid">
         <div class="team-card">
           <div class="team-role">Founder &amp; CEO</div>
-          <div class="team-name">Selena</div>
+          <div class="team-name">Selena Nigmatullaeva</div>
           <div class="team-desc">Initiated and developed KORA from the ground up over three years in Bali. Oversees strategy, tenant selection, and the commercial direction of the project. Construction optimized to $750/m² — half the market rate — without compromising the guest experience.</div>
         </div>
         <div class="team-card">
-          <div class="team-role">Operations Consultant</div>
+          <div class="team-role">Lead Project Consultant</div>
           <div class="team-name">Evgenia Golomuz</div>
-          <div class="team-desc">F&amp;B operations specialist. Brings hands-on experience in running and structuring hospitality businesses in Bali and beyond. She ensures that what's promised to tenants is actually delivered — operationally, day-to-day.</div>
+          <div class="team-desc">F&amp;B operations specialist and lead consultant on the KORA project. Brings hands-on experience in running and structuring hospitality businesses in Bali and beyond. She ensures that what's promised to tenants is actually delivered — operationally, day-to-day.</div>
         </div>
       </div>
     </div>
@@ -1597,7 +1776,7 @@
             </div>
             <div class="loc-fact">
               <span class="loc-icon">🅿️</span>
-              <span class="loc-text"><strong>4,000 m² parking</strong> — 50+ motorbikes, 15+ cars</span>
+              <span class="loc-text"><strong>Largest municipal parking in central Ubud</strong> — 4,000 m², bus-accessible</span>
             </div>
             <div class="loc-fact">
               <span class="loc-icon">👥</span>
@@ -1703,6 +1882,9 @@
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
           e.preventDefault();
+          // Close mobile nav if open
+          document.querySelector('.nav-links').classList.remove('open');
+          document.querySelector('.nav-burger').classList.remove('open');
           const offset = 70;
           window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
         }
