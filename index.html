@@ -103,28 +103,22 @@
     }
     .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
     .hero-right-col { display: flex; flex-direction: column; gap: 20px; }
-    .hero-photo-pair {
-      display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: 8px;
-      height: 300px;
-      flex-shrink: 0;
-    }
-    .hero-photo-item {
-      border-radius: 14px;
+    .hero-photo-main {
+      border-radius: 16px;
       overflow: hidden;
+      height: 340px;
+      flex-shrink: 0;
       position: relative;
     }
-    .hero-photo-item img {
+    .hero-photo-main img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 18%;
       display: block;
       transition: transform 0.7s ease;
     }
-    .hero-photo-item:first-child img { object-position: center 18%; }
-    .hero-photo-item:last-child img  { object-position: center 30%; }
-    .hero-photo-item:hover img { transform: scale(1.05); }
+    .hero-photo-main:hover img { transform: scale(1.04); }
     .hero-eyebrow {
       font-family: var(--font-h);
       font-size: 12px; font-weight: 600; letter-spacing: 0.2em;
@@ -820,7 +814,7 @@
       .deposits-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .hero-photo-pair { height: 220px; }
+      .hero-photo-main { height: 240px; }
       .stat-num { font-size: 28px; }
       .stat-label { font-size: 10px; }
       .stat-card { padding: 18px 12px; }
@@ -845,6 +839,25 @@
       .nav-burger { display: flex; }
     }
   
+    /* ─── PHOTO BREAK ──────────────────────────────────────────────── */
+    .photo-break {
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      position: relative;
+      line-height: 0;
+    }
+    .photo-break img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .photo-break:hover img { transform: scale(1.03); }
+    @media (max-width: 600px) { .photo-break { height: 260px; } }
+
     /* ─── GALLERY ──────────────────────────────────────────────────── */
     .gallery-section { padding: 0; overflow: hidden; line-height: 0; }
     .gallery-grid {
@@ -1067,13 +1080,8 @@
           </div>
         </div>
         <div class="hero-right-col">
-        <div class="hero-photo-pair">
-          <div class="hero-photo-item">
-            <img src="images/entrance.png" alt="KORA Food Hall — golden entrance alley, Ubud" loading="eager">
-          </div>
-          <div class="hero-photo-item">
-            <img src="images/interior-fire.png" alt="KORA Food Hall — candlelit dining interior" loading="eager">
-          </div>
+        <div class="hero-photo-main">
+          <img src="images/entrance.png" alt="KORA Food Hall — golden entrance alley, Ubud" loading="eager">
         </div>
         <div class="hero-stats">
           <div class="stat-card">
@@ -1890,6 +1898,11 @@
       </div>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════════════════════════ PHOTO BREAK -->
+  <div class="photo-break">
+    <img src="images/interior-fire.png" alt="KORA Food Hall — warm atmospheric dining interior" loading="lazy">
+  </div>
 
   <!-- ═══════════════════════════════════════════════════════════ LOCATION -->
   <section id="location">
