@@ -1014,22 +1014,55 @@
     }
     .btn-apply-row:hover { background: var(--copper); color: var(--white); }
 
-    /* ─── MODAL UNIT CHIP ─────────────────────────────────────── */
-    .modal-unit-chip {
-      display: inline-flex;
+    /* ─── MODAL UNIT SELECTED ─────────────────────────────────── */
+    .modal-unit-selected {
+      display: none;
       align-items: center;
-      background: rgba(178,134,83,0.13);
-      border: 1px solid rgba(178,134,83,0.35);
-      color: var(--copper);
-      font-family: var(--font-h);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 20px;
-      margin: 8px 0 14px;
+      gap: 12px;
+      background: rgba(196,100,30,0.1);
+      border: 1px solid rgba(196,100,30,0.4);
+      border-left: 4px solid var(--copper);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 12px 0 16px;
     }
+    .modal-unit-selected.show { display: flex; }
+    .modal-unit-selected-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .modal-unit-selected-text {
+      flex: 1;
+    }
+    .modal-unit-selected-label {
+      font-family: var(--font-h);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 2px;
+    }
+    .modal-unit-selected-value {
+      font-family: var(--font-h);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .modal-unit-selected-change {
+      font-size: 11px;
+      color: var(--ivory-d);
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: var(--font-b);
+      flex-shrink: 0;
+    }
+    .modal-unit-selected-change:hover { color: var(--copper); }
 
     </style>
 </head>
@@ -1877,9 +1910,9 @@
           <div class="team-desc">Initiated and developed KORA from the ground up over three years in Bali. Oversees strategy, tenant selection, and the commercial direction of the project. Construction optimized to $750/m² — half the market rate — without compromising the guest experience.</div>
         </div>
         <div class="team-card">
-          <div class="team-role">Lead Project Consultant</div>
+          <div class="team-role">Concept &amp; Tenant Strategy Advisor</div>
           <div class="team-name">Evgenia Golomuz</div>
-          <div class="team-desc">F&amp;B operations specialist and lead consultant on the KORA project. Brings hands-on experience in running and structuring hospitality businesses in Bali and beyond. She ensures that what's promised to tenants is actually delivered — operationally, day-to-day.</div>
+          <div class="team-desc">Founder of Bali Horeca Chat and hospitality professional with 20+ years in the restaurant industry. Advising KORA since the early concept stage, leading tenant curation and concept approval to ensure every resident fits KORA's vision and quality standards.</div>
         </div>
       </div>
     </div>
@@ -2000,7 +2033,14 @@
       <button class="modal-close" onclick="closeApplyModal()" aria-label="Close">×</button>
       <div class="sec-label" style="margin-bottom:6px;">Apply for a Unit</div>
       <div class="modal-title">KORA Food Hall, Ubud</div>
-      <div id="apply-unit-chip" class="modal-unit-chip" style="display:none;"></div>
+      <div id="apply-unit-selected" class="modal-unit-selected">
+        <div class="modal-unit-selected-icon">🍽️</div>
+        <div class="modal-unit-selected-text">
+          <div class="modal-unit-selected-label">Selected unit</div>
+          <div class="modal-unit-selected-value" id="apply-unit-selected-value">—</div>
+        </div>
+        <button class="modal-unit-selected-change" onclick="closeApplyModal()">Change unit</button>
+      </div>
       <div class="modal-sub">Takes about 15 minutes · We review every application within 48–72 hours</div>
       <iframe
         id="apply-iframe"
@@ -2033,22 +2073,23 @@
     const APPLY_FORM_BASE = 'https://423hrh.share-na2.hsforms.com/2i4c-2GlyTP6XC8QwNOvrKQ';
 
     function openApplyModal(unit, category) {
-      const iframe = document.getElementById('apply-iframe');
-      const chip   = document.getElementById('apply-unit-chip');
+      const iframe    = document.getElementById('apply-iframe');
+      const unitBlock = document.getElementById('apply-unit-selected');
+      const unitVal   = document.getElementById('apply-unit-selected-value');
 
       if (unit && category) {
-        // URL param names must match your HubSpot field internal names.
-        // In HubSpot: Forms → edit form → click a field → "Field name" in the right panel.
+        // Build pre-fill URL (HubSpot uses these param names when field internal
+        // names match — set them in HubSpot: Forms → edit → field → Field name)
         const params = new URLSearchParams({
           unit_number:   unit,
           unit_category: category
         });
         iframe.src = APPLY_FORM_BASE + '?' + params.toString();
-        chip.textContent = 'Unit ' + unit + ' — ' + category;
-        chip.style.display = 'inline-flex';
+        unitVal.textContent = 'Unit ' + unit + ' — ' + category;
+        unitBlock.classList.add('show');
       } else {
         iframe.src = APPLY_FORM_BASE;
-        chip.style.display = 'none';
+        unitBlock.classList.remove('show');
       }
 
       document.getElementById('apply-modal').classList.add('open');
@@ -2061,7 +2102,7 @@
       // Reset after modal fades out so next open starts fresh
       setTimeout(() => {
         document.getElementById('apply-iframe').src = APPLY_FORM_BASE;
-        document.getElementById('apply-unit-chip').style.display = 'none';
+        document.getElementById('apply-unit-selected').classList.remove('show');
       }, 300);
     }
     document.getElementById('apply-modal').addEventListener('click', function(e) {
