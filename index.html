@@ -644,6 +644,24 @@
       border-radius: var(--r);
       padding: 32px 28px;
     }
+    /* ── Team photo avatar ── */
+    .team-photo-wrap {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 2px solid var(--border);
+      background: var(--bg-light);
+      flex-shrink: 0;
+    }
+    .team-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 12%;
+      display: block;
+    }
     .team-role {
       font-family: var(--font-h);
       font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
@@ -1905,11 +1923,17 @@
       </div>
       <div class="team-grid">
         <div class="team-card">
+          <div class="team-photo-wrap">
+            <img src="images/selena.jpg" alt="Selena Nigmatullaeva" loading="lazy" style="object-position: 40% 8%;">
+          </div>
           <div class="team-role">Founder &amp; CEO</div>
           <div class="team-name">Selena Nigmatullaeva</div>
           <div class="team-desc">Initiated and developed KORA from the ground up over three years in Bali. Oversees strategy, tenant selection, and the commercial direction of the project. Construction optimized to $750/m² — half the market rate — without compromising the guest experience.</div>
         </div>
         <div class="team-card">
+          <div class="team-photo-wrap">
+            <img src="images/evgenia.jpg" alt="Evgenia Golomuz" loading="lazy">
+          </div>
           <div class="team-role">Concept &amp; Tenant Strategy Advisor</div>
           <div class="team-name">Evgenia Golomuz</div>
           <div class="team-desc">Founder of Bali Horeca Chat and hospitality professional with 20+ years in the restaurant industry. Advising KORA since the early concept stage, leading tenant curation and concept approval to ensure every resident fits KORA's vision and quality standards.</div>
